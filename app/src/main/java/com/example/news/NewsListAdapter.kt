@@ -15,11 +15,12 @@ class NewsListAdapter(private val listener: NewsItemClicked): RecyclerView.Adapt
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         //converting the xml to view
+        //creating view
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_news, parent, false)
         val viewHolder = NewsViewHolder(view)
         //setting up listener on the item...
         view.setOnClickListener{
-            listener.onItemClicked(items[viewHolder.adapterPosition])
+            listener.onItemClicked(items[viewHolder.bindingAdapterPosition])
         }
         return viewHolder
     }
@@ -29,7 +30,7 @@ class NewsListAdapter(private val listener: NewsItemClicked): RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
-        //bindimg the data to view
+        //binding the data to view
         val currentItem = items[position]
         holder.titleView.text = currentItem.title
         holder.author.text = currentItem.author
@@ -49,8 +50,8 @@ class NewsListAdapter(private val listener: NewsItemClicked): RecyclerView.Adapt
 
 class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     //initializing view Holder with title,image and author
-    val image: ImageView = itemView.findViewById(R.id.image)
     val titleView: TextView = itemView.findViewById(R.id.title)
+    val image: ImageView = itemView.findViewById(R.id.image)
     val author: TextView = itemView.findViewById(R.id.author)
 }
 
